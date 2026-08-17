@@ -1,0 +1,168 @@
+mutation CreateUser($username: String!, $email: String!) @auth(level: USER) {
+  user_insert(data: {
+    id_expr: "auth.uid",
+    username: $username,
+    email: $email
+  })
+}
+
+mutation UpdateUserBio($bio: String!) @auth(level: USER) {
+  user_update(key: {id_expr: "auth.uid"}, data: {bio: $bio})
+}
+
+mutation DeleteUser @auth(level: USER) {
+  user_delete(key: {id_expr: "auth.uid"})
+}
+
+query GetCurrentUser @auth(level: USER) {
+  user(key: {id_expr: "auth.uid"}) {
+    username
+    email
+    bio
+  }
+}
+
+query ListAllUsers @auth(level: PUBLIC, insecureReason: "Public directory of users") {
+  users {
+    username
+  }
+}
+
+mutation CreateLocation($cityName: String!, $countryCode: String!, $lat: Float!, $lon: Float!) @auth(level: USER) {
+  location_insert(data: {
+    cityName: $cityName,
+    countryCode: $countryCode,
+    latitude: $lat,
+    longitude: $lon
+  })
+}
+
+mutation UpdateLocation($id: UUID!, $timezone: String!) @auth(level: USER) {
+  location_update(id: $id, data: {timezone: $timezone})
+}
+
+mutation DeleteLocation($id: UUID!) @auth(level: USER) {
+  location_delete(id: $id)
+}
+
+query GetLocation($id: UUID!) @auth(level: PUBLIC, insecureReason: "Public location data") {
+  location(id: $id) {
+    cityName
+    countryCode
+  }
+}
+
+query ListLocations @auth(level: PUBLIC, insecureReason: "Public location list") {
+  locations {
+    cityName
+  }
+}
+
+mutation CreateWeather($temp: Float!, $cond: String!, $time: Timestamp!, $locId: UUID!) @auth(level: PUBLIC, insecureReason: "Public weather reports") {
+  weatherReport_insert(data: {
+    temperature: $temp,
+    condition: $cond,
+    timestamp: $time,
+    locationId: $locId
+  })
+}
+
+mutation UpdateWeather($id: UUID!, $temp: Float!) @auth(level: PUBLIC, insecureReason: "Public weather updates") {
+  weatherReport_update(id: $id, data: {temperature: $temp})
+}
+
+mutation DeleteWeather($id: UUID!) @auth(level: PUBLIC, insecureReason: "Public weather deletion") {
+  weatherReport_delete(id: $id)
+}
+
+query GetWeather($id: UUID!) @auth(level: PUBLIC, insecureReason: "Public weather data") {
+  weatherReport(id: $id) {
+    temperature
+    condition
+  }
+}
+
+query ListWeather @auth(level: PUBLIC, insecureReason: "Public weather list") {
+  weatherReports {
+    temperature
+    condition
+  }
+}
+
+mutation CreateDiscussion($content: String!, $locId: UUID!) @auth(level: USER) {
+  discussion_insert(data: {
+    userId_expr: "auth.uid",
+    content: $content,
+    locationId: $locId,
+    createdAt_expr: "request.time"
+  })
+}
+
+mutation UpdateDiscussion($id: UUID!, $content: String!) @auth(level: USER) {
+  discussion_update(id: $id, data: {content: $content})
+}
+
+mutation DeleteDiscussion($id: UUID!) @auth(level: USER) {
+  discussion_delete(id: $id)
+}
+
+query GetDiscussion($id: UUID!) @auth(level: PUBLIC, insecureReason: "Public discussions") {
+  discussion(id: $id) {
+    content
+    user { username }
+  }
+}
+
+query ListDiscussions @auth(level: PUBLIC, insecureReason: "Public discussions") {
+  discussions {
+    content
+    createdAt
+  }
+}
+
+mutation CreateReply($content: String!, $discId: UUID!) @auth(level: USER) {
+  reply_insert(data: {
+    content: $content,
+    discussionId: $discId,
+    userId_expr: "auth.uid",
+    createdAt_expr: "request.time"
+  })
+}
+
+mutation UpdateReply($id: UUID!, $content: String!) @auth(level: USER) {
+  reply_update(id: $id, data: {content: $content})
+}
+
+mutation DeleteReply($id: UUID!) @auth(level: USER) {
+  reply_delete(id: $id)
+}
+
+query GetReply($id: UUID!) @auth(level: PUBLIC, insecureReason: "Public replies") {
+  reply(id: $id) {
+    content
+    user { username }
+  }
+}
+
+query ListReplies($discId: UUID!) @auth(level: PUBLIC, insecureReason: "Public replies") {
+  replies(where: {discussionId: {eq: $discId}}) {
+    content
+  }
+}
+
+mutation AddFavorite($locId: UUID!) @auth(level: USER) {
+  favorite_insert(data: {
+    userId_expr: "auth.uid",
+    locationId: $locId
+  })
+}
+
+mutation RemoveFavorite($id: UUID!) @auth(level: USER) {
+  favorite_delete(id: $id)
+}
+
+query ListMyFavorites @auth(level: USER) {
+  favorites(where: {userId: {eq_expr: "auth.uid"}}) {
+    location { cityName }
+  }
+}

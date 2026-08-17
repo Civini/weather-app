@@ -1,0 +1,40 @@
+type User @table {
+  username: String!
+  email: String!
+  avatarUrl: String
+  bio: String
+}
+
+type Location @table {
+  cityName: String!
+  countryCode: String!
+  latitude: Float!
+  longitude: Float!
+  timezone: String
+}
+
+type WeatherReport @table {
+  temperature: Float!
+  condition: String!
+  timestamp: Timestamp!
+  location: Location!
+}
+
+type Discussion @table {
+  content: String!
+  createdAt: Timestamp!
+  user: User!
+  location: Location!
+}
+
+type Reply @table {
+  content: String!
+  createdAt: Timestamp!
+  discussion: Discussion!
+  user: User!
+}
+
+type Favorite @table {
+  user: User!
+  location: Location!
+}

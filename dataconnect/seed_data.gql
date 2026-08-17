@@ -1,0 +1,102 @@
+mutation SeedData @transaction {
+  user_insertMany(data: [
+    {
+      id: "770e8400-e29b-41d4-a716-446655440001",
+      username: "alice",
+      email: "alice@example.com"
+    },
+    {
+      id: "770e8400-e29b-41d4-a716-446655440002",
+      username: "bob",
+      email: "bob@example.com"
+    },
+    {
+      id: "770e8400-e29b-41d4-a716-446655440003",
+      username: "charlie",
+      email: "charlie@example.com"
+    }
+  ])
+  location_insertMany(data: [
+    {
+      id: "880e8400-e29b-41d4-a716-446655440001",
+      cityName: "New York",
+      countryCode: "US",
+      latitude: 40.7128,
+      longitude: -74.0060
+    },
+    {
+      id: "880e8400-e29b-41d4-a716-446655440002",
+      cityName: "London",
+      countryCode: "GB",
+      latitude: 51.5074,
+      longitude: -0.1278
+    },
+    {
+      id: "880e8400-e29b-41d4-a716-446655440003",
+      cityName: "Tokyo",
+      countryCode: "JP",
+      latitude: 35.6762,
+      longitude: 139.6503
+    }
+  ])
+  discussion_insertMany(data: [
+    {
+      id: "990e8400-e29b-41d4-a716-446655440001",
+      content: "Hello from New York",
+      createdAt: "2023-10-01T10:00:00Z",
+      userId: "770e8400-e29b-41d4-a716-446655440001",
+      locationId: "880e8400-e29b-41d4-a716-446655440001"
+    },
+    {
+      id: "990e8400-e29b-41d4-a716-446655440002",
+      content: "Greetings from London",
+      createdAt: "2023-10-01T11:00:00Z",
+      userId: "770e8400-e29b-41d4-a716-446655440002",
+      locationId: "880e8400-e29b-41d4-a716-446655440002"
+    }
+  ])
+  reply_insertMany(data: [
+    {
+      id: "c3e6b4d2-5a9b-4e3c-af2d-886b5e4c3d22",
+      content: "Nice to meet you!",
+      createdAt: "2023-10-01T10:05:00Z",
+      discussionId: "990e8400-e29b-41d4-a716-446655440001",
+      userId: "770e8400-e29b-41d4-a716-446655440002"
+    },
+    {
+      id: "c3e6b4d2-5a9b-4e3c-af2d-886b5e4c3d23",
+      content: "Indeed!",
+      createdAt: "2023-10-01T11:05:00Z",
+      discussionId: "990e8400-e29b-41d4-a716-446655440002",
+      userId: "770e8400-e29b-41d4-a716-446655440003"
+    }
+  ])
+  favorite_insertMany(data: [
+    {
+      id: "d4f7c5e3-6b0c-4f4d-bf3e-987c6f5d4e33",
+      userId: "770e8400-e29b-41d4-a716-446655440001",
+      locationId: "880e8400-e29b-41d4-a716-446655440003"
+    },
+    {
+      id: "d4f7c5e3-6b0c-4f4d-bf3e-987c6f5d4e34",
+      userId: "770e8400-e29b-41d4-a716-446655440002",
+      locationId: "880e8400-e29b-41d4-a716-446655440001"
+    }
+  ])
+  weatherReport_insertMany(data: [
+    {
+      id: "a11e8400-e29b-41d4-a716-446655440001",
+      temperature: 15.5,
+      condition: "Sunny",
+      timestamp: "2023-10-01T12:00:00Z",
+      locationId: "880e8400-e29b-41d4-a716-446655440001"
+    },
+    {
+      id: "a11e8400-e29b-41d4-a716-446655440002",
+      temperature: 10.2,
+      condition: "Cloudy",
+      timestamp: "2023-10-01T12:00:00Z",
+      locationId: "880e8400-e29b-41d4-a716-446655440002"
+    }
+  ])
+}
