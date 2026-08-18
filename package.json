@@ -11,6 +11,8 @@
   "dependencies": {
     "@dataconnect/generated": "file:src/dataconnect-generated",
     "@google/generative-ai": "^0.24.1",
+    "@tsparticles/engine": "^4.3.2",
+    "@tsparticles/react": "^4.3.2",
     "@tsparticles/slim": "^4.3.2",
     "firebase": "^12.17.1",
     "framer-motion": "^13.0.0",
@@ -20,7 +22,6 @@
     "react-dom": "^19.1.1",
     "react-leaflet": "^5.0.0",
     "react-router-dom": "^7.18.2",
-    "react-tsparticles": "^2.12.2",
     "recharts": "^3.10.1",
     "tsparticles": "^4.3.2"
   },
