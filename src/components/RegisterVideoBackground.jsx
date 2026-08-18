@@ -19,14 +19,9 @@ function RegisterVideoBackground() {
           type="video/mp4"
         />
       </video>
-
       {/* Dark overlay */}
       <div className="absolute inset-0 bg-slate-950/60" />
-
-      {/* Blue atmospheric overlay */}
       <div className="absolute inset-0 bg-blue-950/20" />
-
-      {/* Blur */}
       <div className="absolute inset-0 backdrop-blur-[2px]" />
     </div>
   );

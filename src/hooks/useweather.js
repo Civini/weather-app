@@ -13,19 +13,11 @@ import { buildHourlyForecast } from "../utils/forecastHelper";
 function useWeather() {
   const [weather, setWeather] = useState(null);
 
-  // IMPORTANT:
-  // Keep the ORIGINAL OpenWeatherMap forecast list here.
-  // ForecastPage, HourlyPage and ChartPage can then use the same data.
   const [forecast, setForecast] = useState([]);
 
   const [hourly, setHourly] = useState([]);
   const [aqi, setAqi] = useState(null);
   const [loading, setLoading] = useState(false);
-
-  // ============================================
-  // SEARCH WEATHER BY CITY
-  // ============================================
-
   const getWeather = async (city) => {
     if (!city || !city.trim()) {
       return;
@@ -34,7 +26,7 @@ function useWeather() {
     try {
       setLoading(true);
 
-      // Current weather
+      
       const weatherData = await fetchWeather(city.trim());
 
       if (!weatherData || Number(weatherData.cod) !== 200) {
@@ -49,11 +41,6 @@ function useWeather() {
       }
 
       setWeather(weatherData);
-
-      // ==========================================
-      // AQI
-      // ==========================================
-
       try {
         const airData = await fetchAQI(
           weatherData.coord.lat,
@@ -73,24 +60,14 @@ function useWeather() {
         console.error("AQI error:", error);
         setAqi(null);
       }
-
-      // ==========================================
-      // 5 DAY / 3 HOUR FORECAST
-      // ==========================================
-
       const forecastData = await fetchForecast(city.trim());
-
       console.log("FORECAST API RESPONSE:", forecastData);
 
       if (
         forecastData &&
         Array.isArray(forecastData.list)
       ) {
-        // VERY IMPORTANT
-        // Store raw OpenWeatherMap forecast data.
         setForecast(forecastData.list);
-
-        // Hourly data can still use your helper.
         setHourly(
           buildHourlyForecast(forecastData.list)
         );
@@ -116,28 +93,17 @@ function useWeather() {
       setLoading(false);
     }
   };
-
-  // ============================================
-  // CURRENT LOCATION
-  // ============================================
-
   const getCurrentLocation = () => {
     if (!navigator.geolocation) {
       alert("Geolocation is not supported by your browser.");
       return;
     }
-
     navigator.geolocation.getCurrentPosition(
       async (position) => {
         const { latitude, longitude } = position.coords;
 
         try {
           setLoading(true);
-
-          // ======================================
-          // CURRENT WEATHER
-          // ======================================
-
           const weatherData =
             await fetchWeatherByLocation(
               latitude,
@@ -153,11 +119,6 @@ function useWeather() {
           }
 
           setWeather(weatherData);
-
-          // ======================================
-          // AQI
-          // ======================================
-
           try {
             const airData = await fetchAQI(
               latitude,
@@ -177,11 +138,6 @@ function useWeather() {
             console.error("Location AQI error:", error);
             setAqi(null);
           }
-
-          // ======================================
-          // FORECAST
-          // ======================================
-
           const forecastData =
             await fetchForecastByLocation(
               latitude,
@@ -197,7 +153,6 @@ function useWeather() {
             forecastData &&
             Array.isArray(forecastData.list)
           ) {
-            // KEEP RAW DATA
             setForecast(forecastData.list);
 
             setHourly(
@@ -235,11 +190,6 @@ function useWeather() {
       }
     );
   };
-
-  // ============================================
-  // RETURN
-  // ============================================
-
   return {
     weather,
     forecast,
@@ -250,5 +200,4 @@ function useWeather() {
     getCurrentLocation,
   };
 }
-
 export default useWeather;

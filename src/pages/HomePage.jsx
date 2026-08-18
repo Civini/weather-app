@@ -15,9 +15,13 @@ function HomePage({
         addFavorite={addFavorite}
       />
 
-      <WeatherHighlights weather={weather} />
+      <WeatherHighlights
+        weather={weather}
+      />
 
-      <QuickMenu setActivePage={setActivePage} />
+      <QuickMenu
+        setActivePage={setActivePage}
+      />
 
     </div>
   );
