@@ -96,7 +96,7 @@ function AuthenticatedApp() {
       {/* FORECAST */}
 
       {activePage === "forecast" && (
-        <ForecastPage
+        <ForeCastPage
           forecast={forecast}
           setActivePage={setActivePage}
         />
