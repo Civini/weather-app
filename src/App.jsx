@@ -14,7 +14,7 @@ import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 
 import HomePage from "./pages/HomePage";
-import ForeCastPage from "./pages/ForeCastPage";
+import ForecastPage from "./pages/ForecastPage";
 import HourlyPage from "./pages/HourlyPage";
 import ChartPage from "./pages/ChartPage";
 import SunrisePage from "./pages/SunrisePage";
@@ -96,7 +96,7 @@ function AuthenticatedApp() {
       {/* FORECAST */}
 
       {activePage === "forecast" && (
-        <ForeCastPage
+        <ForecastPage
           forecast={forecast}
           setActivePage={setActivePage}
         />
