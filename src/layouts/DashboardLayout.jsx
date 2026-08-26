@@ -1,4 +1,4 @@
-import Sidebar from "../components/sidebar";
+import sidebar from "../components/sidebar";
 import Topbar from "../components/Topbar";
 import VideoBackground from "../components/VideoBackground";
 import { useState } from "react";
@@ -7,6 +7,7 @@ function DashboardLayout({
   weather,
   query,
   setQuery,
+
   loading,
   handleSubmit,
   getCurrentLocation,
