@@ -24,7 +24,7 @@ import FavoritesPage from "./pages/FavoritesPage";
 import ChatPage from "./pages/ChatPage";
 
 import useFavorites from "./hooks/useFavorites";
-import useWeather from "./hooks/useWeather";
+import useWeather from "./hooks/useweather";
 
 
 function AuthenticatedApp() {
