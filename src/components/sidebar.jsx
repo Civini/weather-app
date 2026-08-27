@@ -102,10 +102,6 @@ function Sidebar({
         flex-col
       `}
     >
-      {/* ===================================== */}
-      {/* SIDEBAR HEADER */}
-      {/* ===================================== */}
-
       <div
         className={`
           relative
@@ -196,11 +192,6 @@ function Sidebar({
             </div>
           )}
         </div>
-
-        {/* ================================= */}
-        {/* COLLAPSE BUTTON */}
-        {/* ================================= */}
-
         <button
           type="button"
           onClick={() =>
@@ -256,11 +247,6 @@ function Sidebar({
           )}
         </button>
       </div>
-
-      {/* ===================================== */}
-      {/* NAVIGATION */}
-      {/* ===================================== */}
-
       <nav
         className="
           flex-1

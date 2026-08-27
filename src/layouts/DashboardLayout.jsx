@@ -1,13 +1,14 @@
-import sidebar from "../components/sidebar";
+import { useState } from "react";
+
+import Sidebar from "../components/sidebar";
 import Topbar from "../components/Topbar";
 import VideoBackground from "../components/VideoBackground";
-import { useState } from "react";
+
 function DashboardLayout({
   children,
   weather,
   query,
   setQuery,
-
   loading,
   handleSubmit,
   getCurrentLocation,
@@ -15,8 +16,8 @@ function DashboardLayout({
   activePage,
   setActivePage,
 }) {
-  const [sidebarCollapsed, setSidebarCollapsed] =
-    useState(false);
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
+
   return (
     <div className="relative min-h-screen text-white overflow-x-hidden">
       <VideoBackground weather={weather} />
@@ -34,7 +35,6 @@ function DashboardLayout({
           transition-all
           duration-300
           ease-in-out
-
           ${
             sidebarCollapsed
               ? "md:ml-24"
@@ -62,6 +62,7 @@ function DashboardLayout({
         >
           {children}
         </main>
+
       </div>
     </div>
   );
