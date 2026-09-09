@@ -1,21 +1,18 @@
 function LoginVideoBackground() {
+  const video = `${import.meta.env.BASE_URL}videos/weather-login.mp4`;
   return (
-    <div className="absolute inset-0 overflow-hidden">
+    <div className="fixed inset-0 -z-10 overflow-hidden">
       <video
         autoPlay
-        loop
         muted
+        loop
         playsInline
-        preload="auto"
         className="absolute inset-0 w-full h-full object-cover"
       >
-        <source src="/videos/sunny.mp4" type="video/mp4" />
+        <source src={video} type="video/mp4" />
       </video>
-
-      <div className="absolute inset-0 bg-black/35" />
-      <div className="absolute inset-0 bg-blue-950/20" />
+      <div className="absolute inset-0 bg-black/40" />
     </div>
   );
 }
-
 export default LoginVideoBackground;
