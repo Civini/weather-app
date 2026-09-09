@@ -15,7 +15,7 @@ function VideoBackground({ weather }) {
         return "/videos/rain.mp4";
 
       case "thunderstorm":
-        return "/videos/thunderstorm.mp4";
+        return "/videos/thunder.mp4";
 
       case "snow":
         return "/videos/snow.mp4";
